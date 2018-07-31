@@ -3,7 +3,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from sklearn.datasets import make_moons, make_s_curve
 
-# yo
+# crumples a shape along some axese, displays them
 def equalize_axes():
     ymin, ymax = plt.ylim()
     xmin, xmax = plt.xlim()
