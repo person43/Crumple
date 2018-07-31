@@ -3,7 +3,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from sklearn.datasets import make_moons, make_s_curve
 
-
+# yo
 def equalize_axes():
     ymin, ymax = plt.ylim()
     xmin, xmax = plt.xlim()
@@ -36,9 +36,9 @@ def plot_crumple(pnts, slp, ind):
 
 if __name__ == "__main__":
     # np.random.seed(2)
-    # pnts = np.random.rand(50, 2)
+    # pnts = np.random.rand(100, 2)
     # pnts = np.random.logistic(size=(50, 2))
-    pnts, _ = make_moons(50)
+    pnts, _ = make_moons(100)
 
     plot_crumple(pnts, 1000, 1)
     plot_crumple(pnts, 0, 2)
