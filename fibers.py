@@ -12,8 +12,8 @@ def fiberize(pnts, slp, orientation):
         else:
             colors[tuple(pnt)] = RED
     layers = onion_layers(all_pnts)
+
     fibers = []
-    i = 0
     for layer in layers:
         layer = np.array([pnt for pnt in layer if colors[tuple(pnt)] == BLUE])
         if np.array_equal(layer[0], layer[-1]):
@@ -28,7 +28,7 @@ def fiberize(pnts, slp, orientation):
             i_min = len(layer) - i_min - 1
         layer = np.concatenate((layer[i_min:], layer[:i_min]))
         fibers.append(np.array(layer))
-        i += 1
+
     return fibers
 
 def make_comma(init_size=10000):
