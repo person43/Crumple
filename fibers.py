@@ -1,4 +1,7 @@
 from concave_sides import *
+from sklearn.decomposition import PCA
+import matplotlib.pyplot as plt
+
 
 def fiberize(pnts, slp, orientation):
     vec = np.array([1, slp * 1])
@@ -30,10 +33,15 @@ def fiberize(pnts, slp, orientation):
 
     return fibers
 
+
 # INCOMPLETE: so far only works in one slope/orientation, with y=x and
 # y=-x being the reflection axese, and having the original point set be
 # the left most square in that arrangement
-def fiberize_corner(pnts):
+def fiberize_corner(pnts, slp):
+    angle = np.arctan(slp)
+    angle = np.degrees(angle)
+    pnts = rotate(pnts, angle)
+
     # br is the original pnts
     tr_pnts = mirror_pnts(pnts, 1, TOP)
     tl_pnts = mirror_pnts(tr_pnts, -1, BOTTOM)
@@ -57,5 +65,35 @@ def fiberize_corner(pnts):
         proj = np.dot(layer, vec)
         i_min = np.argmin(proj)
         layer = np.concatenate((layer[i_min:], layer[:i_min]))
+        layer = rotate(layer, -angle)
         fibers.append(np.array(layer))
     return fibers
+
+
+def spinal_tap(pnts):
+    slp = do_pca(pnts)
+    fibers = fiberize_corner(pnts, slp)
+    spine = []
+    for layer in fibers:
+        # plt.plot(layer[:,0], layer[:,1], color='k', linewidth=2)
+        # if len(layer) % 2:
+        #     ind = len(layer) // 2
+        #     med = layer[ind]
+        # else:
+        #     hi = len(layer) // 2
+        #     lo = hi - 1
+        #     med = np.mean(np.array([layer[hi], layer[lo]]), 0)
+        ind = len(layer) // 2
+        med = layer[ind]
+        spine.append(med)
+    spine = np.array(spine)
+    proj = np.dot(spine, np.array([1, slp*1]))
+    indices = np.argsort(proj)
+    return spine[indices]
+
+
+def do_pca(pnts):
+    pca = PCA(n_components=1)
+    pca.fit(pnts)
+    vec = pca.components_[0]
+    return vec[1]/vec[0]

@@ -24,7 +24,7 @@ def compare_fibrations(pnts):
     plt.draw()
 
     plt.subplot(1, 2, 2)
-    fibers = fiberize_corner(pnts)
+    fibers = fiberize_corner(pnts, 0)
     plt.scatter(pnts[:, 0], pnts[:, 1], color='b')
     for layer in fibers:
         plt.plot(layer[:, 0], layer[:, 1], linewidth='1', color='k')
@@ -70,8 +70,9 @@ def fiberization_demo(pnts, slp):
 
 if __name__ == "__main__":
     # pnts = np.random.randn(1000, 2)
-    # compare_fibrations(pnts)
-    # exit()
+    pnts = make_paisley()
+    compare_fibrations(pnts)
+    exit()
 
     pnts = make_paisley()
     # pnts = rotate(pnts, -90)

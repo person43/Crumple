@@ -130,3 +130,8 @@ def find_bridges(layer, colors):
         return None
     b_0, b_1 = np.array(b_0), np.array(b_1)
     return np.concatenate((b_0, b_1))
+
+def mstats(arr):
+    med = np.median(arr)
+    mad = np.median([np.abs(med - d) for d in arr])
+    return med, mad

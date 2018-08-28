@@ -5,7 +5,7 @@ from run_fiber import make_paisley
 
 if __name__ == "__main__":
     np.random.seed(0)
-    pnts = make_paisley(5000)
+    pnts = make_paisley()
     r_pnts = mirror_pnts(pnts, -1, TOP) - np.array([2.5, 2.5])
     t_pnts = pnts + np.array([1, 1])
     t_pnts = rotate(t_pnts, 30)
