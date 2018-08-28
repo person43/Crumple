@@ -75,14 +75,6 @@ def spinal_tap(pnts):
     fibers = fiberize_corner(pnts, slp)
     spine = []
     for layer in fibers:
-        # plt.plot(layer[:,0], layer[:,1], color='k', linewidth=2)
-        # if len(layer) % 2:
-        #     ind = len(layer) // 2
-        #     med = layer[ind]
-        # else:
-        #     hi = len(layer) // 2
-        #     lo = hi - 1
-        #     med = np.mean(np.array([layer[hi], layer[lo]]), 0)
         ind = len(layer) // 2
         med = layer[ind]
         spine.append(med)
